@@ -22,17 +22,18 @@ Assuming, you have docker already installed and that you are in the same directo
 1. Run the following command: `docker build . -t <CONTAINER_NAME>` Expect the image to be roughly 15GB in size. 
 2. Run the following command: `docker run -it --gpus device=<DEVICE_NUMBER> -v "$(pwd)":/<HOME_DIRECTORY_IN_CONTAINER> <CONTAINER_NAME>`. If you desire to adjust the run command further, please refer to the official docker documentation. Otherwise, this command should provide your container with a GPU device. The -v tag will mount and share the program files and directory over to your container with your host machine. Meaning whatever is also generated in the container is also automatically available in the host machine's directory.
 3. Once inside the container, you should find bash scripts that follow the structure, `tune_<IDENTIFIER>.sh`. These will faciliate the parameters, directories and similar information for a fine-tuning a stable diffusion model.
+4. For inference, please modify (to your requirements - output directory, pipeline parameters & input models),  and run the script  `generate-lora-filter-black-images.py` using `python generate-lora-filter-black-images.py`.
 
 ## Overview of the models used
-(A) Baseline: pretrained stable_diffusion_v1.5 TODO: simple script to run
+(A) Baseline: pretrained stable_diffusion_v1.5, `models/pretrained/runwayml/stable-diffusion-v-1.5/v1-5-pruned-emaonly.ckpt`
 
-(B) Fine-tuned: kirchner_lower_lr
+(B) Fine-tuned: `models/lora/kirchner_lower_lr`
 In order to reproduce this model, please run the following command inside the container, `sh tune_kirchner.sh`
 
-(C) Adjust hyperparameters using FID: `kirchner_12_12_2023_silvery_sweep_pre_dataset_update_lower_t_steps`
+(C) Adjust hyperparameters using FID: `models/lora/kirchner_12_12_2023_silvery_sweep_pre_dataset_update_lower_t_steps`
 In order to reproduce this model, please run the following command inside the container, `sh tune_silvery_sweep_1.sh`
 The best model parameters were chosen by selecting the model that was able to achieve the lowest FID score in it's FID-curve against max_training_steps. (the minimum of the curve - thus silvery-sweep-1 hyperparameters were used.)
 
-(D) Dataset improvement: TBD - with updates to the meta description to include the collection as part of the description.
+(D) Dataset improvement: `models/lora/kirchner_18_12_23_simplified_captions`
 
-(E) Augmentation: TBD - with reference to the setups that brought improvements to the GANs performance in a similar domain.
+(E) Subjective Best Using Evaluation Question: `models/lora/kirchner_18_12_2023_test_stellar_sweep_subjective_best_final`
