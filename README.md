@@ -5,6 +5,8 @@ Wandb.ai was used to help track experiments. The link to the supporting experime
 
 Please note that, for the fine-tuning scripts, the templates/tutorials made by HUGGINGFACE were used to make these. The tutorial can be found here: [Text-to-Image Tutorial | Huggingface](https://github.com/huggingface/diffusers/tree/main/examples/text_to_image)
 
+Further credit to Harry Wang for his tutorial: [Fintune SD by Harry Wang](https://github.com/harrywang/finetune-sd)
+
 # Dataset
 The dataset was created using the images from Christin Kirchner's website with her consent. For more of her work, refer to her website here: [Christin Kirchner](https://www.christin-kirchner.com/).
 In order to reproduce the dataset, run the following script: `python3 prepare_data.py`
